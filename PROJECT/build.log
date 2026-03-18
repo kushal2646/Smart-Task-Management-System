@@ -1,0 +1,240 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.smarttask:taskmanager >----------------------
+[INFO] Building taskmanager 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ taskmanager ---
+[INFO] Deleting D:\SMART TASK MANAGEMENT SYSTEM1\PROJECT\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ taskmanager ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ taskmanager ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 14 source files with javac [debug parameters release 17] to target\classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/TaskController.java:[4,40] cannot access com.smarttask.taskmanager.entity.Task
+  bad source file: D:\SMART TASK MANAGEMENT SYSTEM1\PROJECT\src\main\java\com\smarttask\taskmanager\entity\Task.java
+    file does not contain class com.smarttask.taskmanager.entity.Task
+    Please remove or make sure it appears in the correct subdirectory of the sourcepath.
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/UserController.java:[3,8] class TaskStats is public, should be declared in a file named TaskStats.java
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/dto/TaskStats.java:[3,8] duplicate class: com.smarttask.taskmanager.dto.TaskStats
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/entity/Task.java:[3,8] class TaskStats is public, should be declared in a file named TaskStats.java
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[3,44] cannot find symbol
+  symbol:   class TaskStats
+  location: package com.smarttask.taskmanager.controller
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/TaskController.java:[27,17] cannot find symbol
+  symbol:   class Task
+  location: class com.smarttask.taskmanager.controller.TaskController
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/TaskController.java:[54,38] cannot find symbol
+  symbol:   class Task
+  location: class com.smarttask.taskmanager.controller.TaskController
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/TaskController.java:[54,12] cannot find symbol
+  symbol:   class Task
+  location: class com.smarttask.taskmanager.controller.TaskController
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/TaskController.java:[59,12] cannot find symbol
+  symbol:   class Task
+  location: class com.smarttask.taskmanager.controller.TaskController
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/repository/TaskRepository.java:[10,55] cannot find symbol
+  symbol: class Task
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[20,17] cannot find symbol
+  symbol:   class Task
+  location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[25,17] cannot find symbol
+  symbol:   class Task
+  location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[30,49] cannot find symbol
+  symbol:   class Task
+  location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[30,18] cannot find symbol
+  symbol:   class Task
+  location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[49,26] cannot find symbol
+  symbol:   class Task
+  location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[49,12] cannot find symbol
+  symbol:   class Task
+  location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[56,12] cannot find symbol
+  symbol:   class Task
+  location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[66,12] cannot find symbol
+  symbol:   class TaskStats
+  location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[76,12] cannot find symbol
+  symbol:   class TaskStats
+  location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/repository/TaskRepository.java:[15,10] cannot find symbol
+  symbol:   class Task
+  location: interface com.smarttask.taskmanager.repository.TaskRepository
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/repository/TaskRepository.java:[20,10] cannot find symbol
+  symbol:   class Task
+  location: interface com.smarttask.taskmanager.repository.TaskRepository
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/AuthController.java:[53,13] cannot find symbol
+  symbol:   method setUsername(java.lang.String)
+  location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/AuthController.java:[54,13] cannot find symbol
+  symbol:   method setPassword(java.lang.String)
+  location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/AuthController.java:[55,13] cannot find symbol
+  symbol:   method setRole(java.lang.String)
+  location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/AuthController.java:[76,67] cannot find symbol
+  symbol:   method getRole()
+  location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/AuthController.java:[80,34] cannot find symbol
+  symbol:   method getRole()
+  location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/AuthController.java:[81,38] cannot find symbol
+  symbol:   method getUsername()
+  location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[21,14] cannot find symbol
+  symbol:   class Task
+  location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[26,14] cannot find symbol
+  symbol:   class Task
+  location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[34,14] cannot find symbol
+  symbol:   class Task
+  location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[57,9] cannot find symbol
+  symbol:   class Task
+  location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[67,20] cannot find symbol
+  symbol:   class TaskStats
+  location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[77,20] cannot find symbol
+  symbol:   class TaskStats
+  location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/security/CustomUserDetailsService.java:[28,21] cannot find symbol
+  symbol:   method getUsername()
+  location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/security/CustomUserDetailsService.java:[29,21] cannot find symbol
+  symbol:   method getPassword()
+  location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/security/CustomUserDetailsService.java:[30,74] cannot find symbol
+  symbol:   method getRole()
+  location: variable user of type com.smarttask.taskmanager.entity.User
+[INFO] 36 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.350 s
+[INFO] Finished at: 2026-03-15T20:27:11+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project taskmanager: Compilation failure: Compilation failure: 
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/TaskController.java:[4,40] cannot access com.smarttask.taskmanager.entity.Task
+[ERROR]   bad source file: D:\SMART TASK MANAGEMENT SYSTEM1\PROJECT\src\main\java\com\smarttask\taskmanager\entity\Task.java
+[ERROR]     file does not contain class com.smarttask.taskmanager.entity.Task
+[ERROR]     Please remove or make sure it appears in the correct subdirectory of the sourcepath.
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/UserController.java:[3,8] class TaskStats is public, should be declared in a file named TaskStats.java
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/dto/TaskStats.java:[3,8] duplicate class: com.smarttask.taskmanager.dto.TaskStats
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/entity/Task.java:[3,8] class TaskStats is public, should be declared in a file named TaskStats.java
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[3,44] cannot find symbol
+[ERROR]   symbol:   class TaskStats
+[ERROR]   location: package com.smarttask.taskmanager.controller
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/TaskController.java:[27,17] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: class com.smarttask.taskmanager.controller.TaskController
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/TaskController.java:[54,38] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: class com.smarttask.taskmanager.controller.TaskController
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/TaskController.java:[54,12] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: class com.smarttask.taskmanager.controller.TaskController
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/TaskController.java:[59,12] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: class com.smarttask.taskmanager.controller.TaskController
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/repository/TaskRepository.java:[10,55] cannot find symbol
+[ERROR]   symbol: class Task
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[20,17] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[25,17] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[30,49] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[30,18] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[49,26] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[49,12] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[56,12] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[66,12] cannot find symbol
+[ERROR]   symbol:   class TaskStats
+[ERROR]   location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[76,12] cannot find symbol
+[ERROR]   symbol:   class TaskStats
+[ERROR]   location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/repository/TaskRepository.java:[15,10] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: interface com.smarttask.taskmanager.repository.TaskRepository
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/repository/TaskRepository.java:[20,10] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: interface com.smarttask.taskmanager.repository.TaskRepository
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/AuthController.java:[53,13] cannot find symbol
+[ERROR]   symbol:   method setUsername(java.lang.String)
+[ERROR]   location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/AuthController.java:[54,13] cannot find symbol
+[ERROR]   symbol:   method setPassword(java.lang.String)
+[ERROR]   location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/AuthController.java:[55,13] cannot find symbol
+[ERROR]   symbol:   method setRole(java.lang.String)
+[ERROR]   location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/AuthController.java:[76,67] cannot find symbol
+[ERROR]   symbol:   method getRole()
+[ERROR]   location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/AuthController.java:[80,34] cannot find symbol
+[ERROR]   symbol:   method getRole()
+[ERROR]   location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/controller/AuthController.java:[81,38] cannot find symbol
+[ERROR]   symbol:   method getUsername()
+[ERROR]   location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[21,14] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[26,14] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[34,14] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[57,9] cannot find symbol
+[ERROR]   symbol:   class Task
+[ERROR]   location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[67,20] cannot find symbol
+[ERROR]   symbol:   class TaskStats
+[ERROR]   location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/service/TaskService.java:[77,20] cannot find symbol
+[ERROR]   symbol:   class TaskStats
+[ERROR]   location: class com.smarttask.taskmanager.service.TaskService
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/security/CustomUserDetailsService.java:[28,21] cannot find symbol
+[ERROR]   symbol:   method getUsername()
+[ERROR]   location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/security/CustomUserDetailsService.java:[29,21] cannot find symbol
+[ERROR]   symbol:   method getPassword()
+[ERROR]   location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] /D:/SMART TASK MANAGEMENT SYSTEM1/PROJECT/src/main/java/com/smarttask/taskmanager/security/CustomUserDetailsService.java:[30,74] cannot find symbol
+[ERROR]   symbol:   method getRole()
+[ERROR]   location: variable user of type com.smarttask.taskmanager.entity.User
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
