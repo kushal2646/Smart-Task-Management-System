@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:8080/api/tasks';
 
-// Set up interceptor to prepend the token to all authenticated requests
+// Set up request interceptor to add token to all authenticated requests
 axios.interceptors.request.use(
     config => {
         const token = localStorage.getItem('token');
@@ -12,6 +12,25 @@ axios.interceptors.request.use(
         return config;
     },
     error => {
+        return Promise.reject(error);
+    }
+);
+
+// Set up response interceptor to handle expired/invalid tokens
+axios.interceptors.response.use(
+    response => response,
+    error => {
+        if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+            // Token is invalid or expired — clear auth state and reload
+            const token = localStorage.getItem('token');
+            if (token) {
+                console.warn('Session expired or invalid. Logging out...');
+                localStorage.removeItem('token');
+                localStorage.removeItem('role');
+                localStorage.removeItem('username');
+                window.location.reload();
+            }
+        }
         return Promise.reject(error);
     }
 );

@@ -7,6 +7,9 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,8 +19,9 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    // Generate a secure key for HS256
-    private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    // Use a fixed secret key so tokens survive app restarts
+    private static final String SECRET = "SmartTaskManagementSystemSecretKeyForJWT2026SecureKey!!";
+    private static final Key key = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);

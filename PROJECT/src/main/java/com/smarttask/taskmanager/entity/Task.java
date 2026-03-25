@@ -1,6 +1,7 @@
 package com.smarttask.taskmanager.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
 
 @Entity
@@ -9,6 +10,7 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("taskId")
     private Long id;
 
     private String title;

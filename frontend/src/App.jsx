@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Dashboard from './components/Dashboard';
 import Auth from './components/Auth';
 import { isAuthenticated as checkAuth, logout as performLogout, getCurrentUser } from './services/auth.service';
-import logo from './assets/logo.png';
+import { HiOutlineViewGrid, HiOutlineLogout } from 'react-icons/hi';
 import './App.css';
 
 function App() {
@@ -10,7 +10,6 @@ function App() {
     const [currentUser, setCurrentUser] = useState(null);
 
     useEffect(() => {
-        // Check initial auth state on load
         if (checkAuth()) {
             setIsAuthenticated(true);
             setCurrentUser(getCurrentUser());
@@ -36,18 +35,28 @@ function App() {
         <div className="app-main">
             <nav className="top-nav glass-panel">
                 <div className="nav-brand">
-                    <img src={logo} alt="Logo" className="nav-logo" />
+                    <div className="nav-logo-icon">
+                        <HiOutlineViewGrid />
+                    </div>
                     <span className="nav-title">Smart Task</span>
                 </div>
                 
                 <div className="nav-user">
                     <div className="user-info">
-                        <span className="username">{currentUser?.username}</span>
-                        <span className="role-badge" data-role={currentUser?.role}>
-                            {currentUser?.role?.replace('ROLE_', '')}
-                        </span>
+                        <div className="user-avatar">
+                            {currentUser?.username?.charAt(0)}
+                        </div>
+                        <div className="user-details">
+                            <span className="username">{currentUser?.username}</span>
+                            <span className="role-badge" data-role={currentUser?.role}>
+                                {currentUser?.role?.replace('ROLE_', '')}
+                            </span>
+                        </div>
                     </div>
-                    <button className="btn-logout" onClick={handleLogout}>Log Out</button>
+                    <button className="btn-logout" onClick={handleLogout}>
+                        <HiOutlineLogout />
+                        Log Out
+                    </button>
                 </div>
             </nav>
 

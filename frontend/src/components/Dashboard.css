@@ -1,97 +1,424 @@
+/* ======================================================
+   Dashboard — Stats, Search, Kanban Board & Layout
+   ====================================================== */
+
 .dashboard-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 2rem 1rem;
-    width: 100vw;
+    padding: 1.5rem;
+    width: 100%;
+    animation: fadeIn 0.4s ease-out;
 }
 
+/* ======= Header ======= */
 .dashboard-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+    padding: 1rem 0;
 }
 
 .dashboard-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(90deg, var(--primary-color), #a371f7);
+    font-size: 2rem;
+    font-weight: 800;
+    background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.3rem;
 }
 
 .dashboard-header p {
     color: var(--text-secondary);
-    font-size: 1.1rem;
-    margin: 0;
+    font-size: 1rem;
 }
 
 .dashboard-main {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
+}
+
+/* ======= Stats Banner ======= */
+.stats-banner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 0;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    border-radius: var(--radius-lg);
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(16px);
+    transition: all var(--transition);
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.stat-card:nth-child(1) { animation-delay: 0s; }
+.stat-card:nth-child(2) { animation-delay: 0.1s; }
+.stat-card:nth-child(3) { animation-delay: 0.2s; }
+.stat-card:nth-child(4) { animation-delay: 0.3s; }
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-hover);
+}
+
+.stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-md);
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.stat-icon.total {
+    background: rgba(99, 102, 241, 0.15);
+    color: var(--accent-blue-light);
+}
+
+.stat-icon.active {
+    background: rgba(251, 191, 36, 0.15);
+    color: var(--accent-amber);
+}
+
+.stat-icon.completed {
+    background: rgba(52, 211, 153, 0.15);
+    color: var(--accent-emerald);
+}
+
+.stat-icon.overdue {
+    background: rgba(251, 113, 133, 0.15);
+    color: var(--accent-rose);
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--text-primary);
+}
+
+.stat-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ======= Create Task Button ======= */
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.btn-toggle-form {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    font-weight: 700;
+    align-self: flex-start;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.25);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.btn-toggle-form:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(99, 102, 241, 0.35);
+}
+
+.btn-toggle-form.active {
+    background: rgba(251, 113, 133, 0.1);
+    color: var(--accent-rose);
+    border: 1px solid rgba(251, 113, 133, 0.3);
+    box-shadow: none;
+}
+
+.btn-toggle-form.active:hover {
+    background: rgba(251, 113, 133, 0.15);
+    transform: none;
+}
+
+/* ======= Tasks Section ======= */
+.tasks-section {
+    margin-top: 0.5rem;
 }
 
 .tasks-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 1rem;
 }
 
 .tasks-header h2 {
-    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
 .task-count {
-    color: var(--text-secondary);
-    font-size: 1rem;
+    color: var(--text-tertiary);
+    font-size: 0.9rem;
     font-weight: 500;
 }
 
 .btn-refresh {
-    background-color: var(--surface-color);
-    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--surface-color);
+    color: var(--text-secondary);
     border: 1px solid var(--border-color);
+    padding: 0.45rem 0.85rem;
+    font-size: 0.8rem;
+    border-radius: var(--radius-sm);
 }
 
 .btn-refresh:hover {
-    background-color: var(--surface-hover);
-    border-color: var(--primary-color);
+    background: var(--surface-hover);
+    border-color: var(--accent-blue);
+    color: var(--accent-blue-light);
 }
 
-.tasks-grid {
+/* ======= Search & Filter Bar ======= */
+.search-filter-bar {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    animation: fadeInUp 0.3s ease-out;
+}
+
+.search-box {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    position: absolute;
+    left: 0.85rem;
+    color: var(--text-tertiary);
+    font-size: 1.1rem;
+    pointer-events: none;
+}
+
+.search-input {
+    padding-left: 2.5rem !important;
+    padding-right: 2.5rem !important;
+    background: rgba(15, 23, 42, 0.5) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-md) !important;
+    font-size: 0.9rem !important;
+}
+
+.search-input:focus {
+    border-color: var(--accent-blue) !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+}
+
+.search-clear {
+    position: absolute;
+    right: 0.6rem;
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    font-size: 1rem;
+    padding: 0.25rem;
+    border-radius: 50%;
+    display: flex;
+    cursor: pointer;
+}
+
+.search-clear:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.filter-group {
+    flex-shrink: 0;
+}
+
+.filter-select {
+    min-width: 160px;
+    background: rgba(15, 23, 42, 0.5) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-md) !important;
+    font-size: 0.9rem !important;
+    padding: 0.8rem 2.5rem 0.8rem 1rem !important;
+}
+
+/* ======= Kanban Board ======= */
+.kanban-board {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    min-height: 300px;
 }
 
-.error-alert {
-    background-color: rgba(248, 81, 73, 0.1);
-    color: var(--danger-color);
-    border: 1px solid rgba(248, 81, 73, 0.4);
+.kanban-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
     padding: 1rem;
-    border-radius: var(--border-radius);
-    margin-bottom: 1.5rem;
+    min-height: 200px;
+    transition: border-color var(--transition);
 }
 
-.loading-spinner {
-    text-align: center;
-    padding: 3rem;
+.kanban-column:hover {
+    border-color: var(--border-hover);
+}
+
+.kanban-column-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 0.25rem;
+}
+
+.kanban-column-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     color: var(--text-secondary);
+}
+
+.column-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.column-dot.pending { background: var(--accent-blue-light); }
+.column-dot.in-progress { background: var(--accent-amber); }
+.column-dot.completed { background: var(--accent-emerald); }
+.column-dot.overdue { background: var(--accent-rose); }
+
+.kanban-column-count {
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+}
+
+.kanban-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    color: var(--text-tertiary);
+    font-size: 0.82rem;
     font-style: italic;
 }
 
+/* ======= Loading ======= */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    gap: 1rem;
+}
+
+.loading-spinner-ring {
+    width: 42px;
+    height: 42px;
+    border: 3px solid var(--border-color);
+    border-top: 3px solid var(--accent-blue);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.loading-text {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* ======= Empty State ======= */
 .empty-state {
     text-align: center;
-    padding: 4rem 2rem;
+    padding: 3rem 2rem;
     color: var(--text-secondary);
+}
+
+.empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
 }
 
 .empty-state h3 {
     color: var(--text-primary);
+    font-size: 1.2rem;
     margin-bottom: 0.5rem;
+}
+
+/* ======= Responsive ======= */
+@media (max-width: 1100px) {
+    .kanban-board {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .stats-banner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .search-filter-bar {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 640px) {
+    .kanban-board {
+        grid-template-columns: 1fr;
+    }
+    .stats-banner {
+        grid-template-columns: 1fr;
+    }
+    .dashboard-header h1 {
+        font-size: 1.5rem;
+    }
 }

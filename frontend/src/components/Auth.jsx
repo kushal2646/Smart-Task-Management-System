@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Auth.css';
-import logo from '../assets/logo.png';
 import { login, register } from '../services/auth.service';
+import { HiOutlineViewGrid, HiOutlineUser, HiOutlineLockClosed, HiOutlineShieldCheck } from 'react-icons/hi';
 
 const Auth = ({ onAuthSuccess }) => {
     const [isLogin, setIsLogin] = useState(true);
@@ -22,13 +22,12 @@ const Auth = ({ onAuthSuccess }) => {
                 onAuthSuccess();
             } else {
                 await register(username, password, role);
-                // After successful registration, automatically log them in
                 await login(username, password);
                 onAuthSuccess();
             }
         } catch (err) {
             console.error('Auth error:', err);
-            setError(err.response?.data || 'Authentication failed. Please check credentials.');
+            setError(err.response?.data || 'Authentication failed. Please check your credentials.');
         } finally {
             setLoading(false);
         }
@@ -36,11 +35,30 @@ const Auth = ({ onAuthSuccess }) => {
 
     return (
         <div className="auth-container">
-            <div className="auth-box glass-panel animate-fade-in">
+            <div className="auth-box glass-panel">
                 <div className="auth-header">
-                    <img src={logo} alt="Smart Task Management Logo" className="auth-logo" />
-                    <h1>Smart Task Management System</h1>
-                    <p>{isLogin ? 'Welcome back! Please login.' : 'Create your new account.'}</p>
+                    <div className="auth-logo-icon">
+                        <HiOutlineViewGrid />
+                    </div>
+                    <h1>Smart Task Manager</h1>
+                    <p>{isLogin ? 'Welcome back! Sign in to continue.' : 'Create your account to get started.'}</p>
+                </div>
+
+                <div className="auth-tabs">
+                    <button 
+                        type="button"
+                        className={`auth-tab ${isLogin ? 'active' : ''}`} 
+                        onClick={() => setIsLogin(true)}
+                    >
+                        Sign In
+                    </button>
+                    <button 
+                        type="button"
+                        className={`auth-tab ${!isLogin ? 'active' : ''}`} 
+                        onClick={() => setIsLogin(false)}
+                    >
+                        Sign Up
+                    </button>
                 </div>
 
                 {error && <div className="error-alert">{error}</div>}
@@ -48,50 +66,52 @@ const Auth = ({ onAuthSuccess }) => {
                 <form className="auth-form" onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label>Username</label>
-                        <input 
-                            type="text" 
-                            value={username} 
-                            onChange={(e) => setUsername(e.target.value)} 
-                            required 
-                            placeholder="Enter username"
-                        />
+                        <div className="input-with-icon">
+                            <input 
+                                type="text" 
+                                value={username} 
+                                onChange={(e) => setUsername(e.target.value)} 
+                                required 
+                                placeholder="Enter your username"
+                                id="auth-username"
+                            />
+                            <HiOutlineUser className="input-icon" />
+                        </div>
                     </div>
 
                     <div className="form-group">
                         <label>Password</label>
-                        <input 
-                            type="password" 
-                            value={password} 
-                            onChange={(e) => setPassword(e.target.value)} 
-                            required 
-                            placeholder="••••••••"
-                        />
+                        <div className="input-with-icon">
+                            <input 
+                                type="password" 
+                                value={password} 
+                                onChange={(e) => setPassword(e.target.value)} 
+                                required 
+                                placeholder="••••••••"
+                                id="auth-password"
+                            />
+                            <HiOutlineLockClosed className="input-icon" />
+                        </div>
                     </div>
 
                     {!isLogin && (
-                        <div className="form-group">
+                        <div className="form-group" style={{ animation: 'fadeInUp 0.3s ease-out' }}>
                             <label>Role</label>
-                            <select value={role} onChange={(e) => setRole(e.target.value)}>
-                                <option value="ROLE_USER">User</option>
-                                <option value="ROLE_MANAGER">Manager</option>
-                                <option value="ROLE_ADMIN">Admin</option>
-                            </select>
+                            <div className="input-with-icon">
+                                <select value={role} onChange={(e) => setRole(e.target.value)} id="auth-role">
+                                    <option value="ROLE_USER">User</option>
+                                    <option value="ROLE_MANAGER">Manager</option>
+                                    <option value="ROLE_ADMIN">Admin</option>
+                                </select>
+                                <HiOutlineShieldCheck className="input-icon" />
+                            </div>
                         </div>
                     )}
 
-                    <button type="submit" className="btn-auth" disabled={loading}>
-                        {loading ? 'Processing...' : (isLogin ? 'Log In' : 'Sign Up')}
+                    <button type="submit" className="btn-auth" disabled={loading} id="auth-submit">
+                        {loading ? 'Processing...' : (isLogin ? 'Sign In' : 'Create Account')}
                     </button>
                 </form>
-
-                <div className="auth-footer">
-                    <p>
-                        {isLogin ? "Don't have an account? " : "Already have an account? "}
-                        <span className="auth-toggle" onClick={() => setIsLogin(!isLogin)}>
-                            {isLogin ? 'Sign up' : 'Log in'}
-                        </span>
-                    </p>
-                </div>
             </div>
         </div>
     );

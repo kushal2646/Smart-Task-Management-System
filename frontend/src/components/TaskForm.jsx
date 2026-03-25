@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './TaskForm.css';
 import { getAllUsers } from '../services/api';
+import { HiOutlinePlusCircle } from 'react-icons/hi';
 
 const TaskForm = ({ onAdd }) => {
     const [title, setTitle] = useState('');
@@ -49,8 +50,8 @@ const TaskForm = ({ onAdd }) => {
     };
 
     return (
-        <form className="task-form glass-panel animate-fade-in" onSubmit={handleSubmit}>
-            <h2>Create New Task</h2>
+        <form className="task-form glass-panel" onSubmit={handleSubmit}>
+            <h2>📝 Create New Task</h2>
             
             <div className="form-group">
                 <label>Title</label>
@@ -60,6 +61,7 @@ const TaskForm = ({ onAdd }) => {
                     onChange={(e) => setTitle(e.target.value)} 
                     placeholder="Enter task title..."
                     required
+                    id="task-title"
                 />
             </div>
             
@@ -68,24 +70,25 @@ const TaskForm = ({ onAdd }) => {
                 <textarea 
                     value={description} 
                     onChange={(e) => setDescription(e.target.value)} 
-                    placeholder="Task details..."
+                    placeholder="Describe the task..."
                     rows="3"
+                    id="task-description"
                 />
             </div>
             
             <div className="form-row">
                 <div className="form-group">
                     <label>Priority</label>
-                    <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-                        <option value="High">High</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Low">Low</option>
+                    <select value={priority} onChange={(e) => setPriority(e.target.value)} id="task-priority">
+                        <option value="High">🔴 High</option>
+                        <option value="Medium">🟡 Medium</option>
+                        <option value="Low">🟢 Low</option>
                     </select>
                 </div>
                 
                 <div className="form-group">
                     <label>Status</label>
-                    <select value={status} onChange={(e) => setStatus(e.target.value)}>
+                    <select value={status} onChange={(e) => setStatus(e.target.value)} id="task-status">
                         <option value="Pending">Pending</option>
                         <option value="In Progress">In Progress</option>
                         <option value="Completed">Completed</option>
@@ -94,8 +97,8 @@ const TaskForm = ({ onAdd }) => {
 
                 <div className="form-group">
                     <label>Assignee</label>
-                    <select value={assigneeUsername} onChange={(e) => setAssigneeUsername(e.target.value)}>
-                        <option value="">-- Unassigned --</option>
+                    <select value={assigneeUsername} onChange={(e) => setAssigneeUsername(e.target.value)} id="task-assignee">
+                        <option value="">— Unassigned —</option>
                         {users.map(u => (
                             <option key={u} value={u}>{u}</option>
                         ))}
@@ -108,11 +111,15 @@ const TaskForm = ({ onAdd }) => {
                         type="date" 
                         value={dueDate} 
                         onChange={(e) => setDueDate(e.target.value)} 
+                        id="task-due-date"
                     />
                 </div>
             </div>
             
-            <button type="submit" className="btn-submit">Add Task</button>
+            <button type="submit" className="btn-submit" id="task-submit">
+                <HiOutlinePlusCircle />
+                Add Task
+            </button>
         </form>
     );
 };
