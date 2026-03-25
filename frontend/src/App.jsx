@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Dashboard from './components/Dashboard';
+import Sidebar from './components/Sidebar';
 import Auth from './components/Auth';
 import { isAuthenticated as checkAuth, logout as performLogout, getCurrentUser } from './services/auth.service';
-import { HiOutlineViewGrid, HiOutlineLogout } from 'react-icons/hi';
 import './App.css';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
+    const [activeView, setActiveView] = useState('dashboard');
 
     useEffect(() => {
         if (checkAuth()) {
@@ -32,35 +33,16 @@ function App() {
     }
 
     return (
-        <div className="app-main">
-            <nav className="top-nav glass-panel">
-                <div className="nav-brand">
-                    <div className="nav-logo-icon">
-                        <HiOutlineViewGrid />
-                    </div>
-                    <span className="nav-title">Smart Task</span>
-                </div>
-                
-                <div className="nav-user">
-                    <div className="user-info">
-                        <div className="user-avatar">
-                            {currentUser?.username?.charAt(0)}
-                        </div>
-                        <div className="user-details">
-                            <span className="username">{currentUser?.username}</span>
-                            <span className="role-badge" data-role={currentUser?.role}>
-                                {currentUser?.role?.replace('ROLE_', '')}
-                            </span>
-                        </div>
-                    </div>
-                    <button className="btn-logout" onClick={handleLogout}>
-                        <HiOutlineLogout />
-                        Log Out
-                    </button>
-                </div>
-            </nav>
-
-            <Dashboard currentUser={currentUser} />
+        <div className="app-layout">
+            <Sidebar
+                currentUser={currentUser}
+                onLogout={handleLogout}
+                activeView={activeView}
+                onViewChange={setActiveView}
+            />
+            <main className="main-content">
+                <Dashboard currentUser={currentUser} activeView={activeView} />
+            </main>
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/tasks';
+const API_URL = '/api/tasks';
 
 // Set up request interceptor to add token to all authenticated requests
 axios.interceptors.request.use(
@@ -21,7 +21,6 @@ axios.interceptors.response.use(
     response => response,
     error => {
         if (error.response && (error.response.status === 401 || error.response.status === 403)) {
-            // Token is invalid or expired — clear auth state and reload
             const token = localStorage.getItem('token');
             if (token) {
                 console.warn('Session expired or invalid. Logging out...');
@@ -60,6 +59,6 @@ export const deleteTask = async (taskId) => {
 };
 
 export const getAllUsers = async () => {
-    const response = await axios.get('http://localhost:8080/api/users');
+    const response = await axios.get('/api/users');
     return response.data;
 };

@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: stm-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: smart_task_management
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - stm-network
+
+  backend:
+    build:
+      context: ./PROJECT
+      dockerfile: Dockerfile
+    container_name: stm-backend
+    ports:
+      - "10000:10000"
+    environment:
+      PORT: 10000
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/smart_task_management?allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - stm-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: stm-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_TARGET: http://backend:10000
+    depends_on:
+      - backend
+    networks:
+      - stm-network
+
+volumes:
+  mysql_data:
+
+networks:
+  stm-network:
+    driver: bridge

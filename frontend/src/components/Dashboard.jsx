@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import TaskCard from './TaskCard';
 import TaskForm from './TaskForm';
 import { getTasks, addTask, deleteTask, getStats, updateTaskStatus } from '../services/api';
-import { HiOutlineClipboardList, HiOutlineClock, HiOutlineCheckCircle, HiOutlineExclamationCircle, HiOutlineRefresh, HiOutlineSearch, HiOutlinePlus, HiOutlineX } from 'react-icons/hi';
+import {
+    HiOutlineClipboardList, HiOutlineClock, HiOutlineCheckCircle,
+    HiOutlineExclamationCircle, HiOutlineRefresh, HiOutlineSearch,
+    HiOutlinePlus, HiOutlineX, HiOutlineTrendingUp, HiOutlineCalendar
+} from 'react-icons/hi';
 import './Dashboard.css';
 
-const Dashboard = ({ currentUser }) => {
+const Dashboard = ({ currentUser, activeView }) => {
     const [tasks, setTasks] = useState([]);
     const [stats, setStats] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -70,9 +74,8 @@ const Dashboard = ({ currentUser }) => {
         }
     };
 
-    // Filter tasks by search and priority
     const filteredTasks = tasks.filter(task => {
-        const matchesSearch = !searchQuery || 
+        const matchesSearch = !searchQuery ||
             task.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
             task.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
             task.assigneeUsername?.toLowerCase().includes(searchQuery.toLowerCase());
@@ -80,7 +83,6 @@ const Dashboard = ({ currentUser }) => {
         return matchesSearch && matchesPriority;
     });
 
-    // Group tasks by status for Kanban view
     const groupedTasks = {
         'Pending': filteredTasks.filter(t => t.status === 'Pending'),
         'In Progress': filteredTasks.filter(t => t.status === 'In Progress'),
@@ -89,114 +91,171 @@ const Dashboard = ({ currentUser }) => {
     };
 
     const columns = [
-        { key: 'Pending', label: 'Pending', dotClass: 'pending', icon: '⏳' },
-        { key: 'In Progress', label: 'In Progress', dotClass: 'in-progress', icon: '⚡' },
-        { key: 'Completed', label: 'Completed', dotClass: 'completed', icon: '✅' },
-        { key: 'Overdue', label: 'Overdue', dotClass: 'overdue', icon: '🔴' },
+        { key: 'Pending', label: 'Pending', dotClass: 'pending', icon: <HiOutlineClock /> },
+        { key: 'In Progress', label: 'In Progress', dotClass: 'in-progress', icon: <HiOutlineTrendingUp /> },
+        { key: 'Completed', label: 'Completed', dotClass: 'completed', icon: <HiOutlineCheckCircle /> },
+        { key: 'Overdue', label: 'Overdue', dotClass: 'overdue', icon: <HiOutlineExclamationCircle /> },
     ];
+
+    const getGreeting = () => {
+        const hour = new Date().getHours();
+        if (hour < 12) return 'Good Morning';
+        if (hour < 17) return 'Good Afternoon';
+        return 'Good Evening';
+    };
+
+    const getCompletionRate = () => {
+        if (!stats || !stats.total || stats.total === 0) return 0;
+        return Math.round(((stats.completed || 0) / stats.total) * 100);
+    };
+
+    const today = new Date().toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
 
     return (
         <div className="dashboard-container">
-            <header className="dashboard-header animate-fade-in">
-                <h1>📊 Dashboard</h1>
-                <p>
-                    {isManagerOrAdmin 
-                        ? 'Manage and track all team tasks' 
-                        : `Welcome back, ${currentUser?.username}!`
-                    }
-                </p>
+            {/* Greeting Banner */}
+            <header className="greeting-banner animate-fade-in">
+                <div className="greeting-left">
+                    <h1>{getGreeting()}, {currentUser?.username} 👋</h1>
+                    <p className="greeting-subtitle">
+                        {isManagerOrAdmin
+                            ? 'Here\'s an overview of your team\'s progress.'
+                            : 'Here\'s what you have on your plate today.'}
+                    </p>
+                </div>
+                <div className="greeting-right">
+                    <div className="date-display">
+                        <HiOutlineCalendar className="date-icon-large" />
+                        <span>{today}</span>
+                    </div>
+                </div>
             </header>
 
             <main className="dashboard-main">
-                {/* Stats Section */}
+                {/* Stats Row */}
                 {stats && (
-                    <section className="stats-banner">
-                        <div className="stat-card">
-                            <div className="stat-icon total">
+                    <section className="stats-row">
+                        <div className="stat-card stat-total">
+                            <div className="stat-icon-wrap total">
                                 <HiOutlineClipboardList />
                             </div>
-                            <div className="stat-info">
-                                <span className="stat-value">{stats.total || 0}</span>
+                            <div className="stat-body">
+                                <span className="stat-number">{stats.total || 0}</span>
                                 <span className="stat-label">Total Tasks</span>
                             </div>
+                            <div className="stat-decoration"></div>
                         </div>
-                        <div className="stat-card">
-                            <div className="stat-icon active">
+                        <div className="stat-card stat-active">
+                            <div className="stat-icon-wrap active">
                                 <HiOutlineClock />
                             </div>
-                            <div className="stat-info">
-                                <span className="stat-value">{(stats.inProgress || 0) + (stats.pending || 0)}</span>
+                            <div className="stat-body">
+                                <span className="stat-number">{(stats.inProgress || 0) + (stats.pending || 0)}</span>
                                 <span className="stat-label">Active</span>
                             </div>
+                            <div className="stat-decoration"></div>
                         </div>
-                        <div className="stat-card">
-                            <div className="stat-icon completed">
+                        <div className="stat-card stat-completed">
+                            <div className="stat-icon-wrap completed">
                                 <HiOutlineCheckCircle />
                             </div>
-                            <div className="stat-info">
-                                <span className="stat-value">{stats.completed || 0}</span>
+                            <div className="stat-body">
+                                <span className="stat-number">{stats.completed || 0}</span>
                                 <span className="stat-label">Completed</span>
                             </div>
+                            <div className="stat-decoration"></div>
                         </div>
-                        <div className="stat-card">
-                            <div className="stat-icon overdue">
+                        <div className="stat-card stat-overdue">
+                            <div className="stat-icon-wrap overdue">
                                 <HiOutlineExclamationCircle />
                             </div>
-                            <div className="stat-info">
-                                <span className="stat-value">{stats.overdue || 0}</span>
+                            <div className="stat-body">
+                                <span className="stat-number">{stats.overdue || 0}</span>
                                 <span className="stat-label">Overdue</span>
+                            </div>
+                            <div className="stat-decoration"></div>
+                        </div>
+
+                        {/* Completion Ring */}
+                        <div className="stat-card stat-ring-card">
+                            <div className="completion-ring">
+                                <svg viewBox="0 0 100 100" className="ring-svg">
+                                    <circle className="ring-bg" cx="50" cy="50" r="42" />
+                                    <circle
+                                        className="ring-progress"
+                                        cx="50" cy="50" r="42"
+                                        style={{
+                                            strokeDasharray: `${getCompletionRate() * 2.64} 264`,
+                                        }}
+                                    />
+                                </svg>
+                                <div className="ring-value">{getCompletionRate()}%</div>
+                            </div>
+                            <div className="stat-body">
+                                <span className="stat-label">Completion Rate</span>
                             </div>
                         </div>
                     </section>
                 )}
 
-                {/* Create Task Button + Form */}
+                {/* Create Task Button + Modal */}
                 {isManagerOrAdmin && (
-                    <section className="form-section">
-                        <button 
-                            className={`btn-toggle-form ${showForm ? 'active' : ''}`}
+                    <section className="actions-bar">
+                        <button
+                            className={`btn-create-task ${showForm ? 'active' : ''}`}
                             onClick={() => setShowForm(!showForm)}
+                            id="create-task-btn"
                         >
-                            {showForm ? <><HiOutlineX /> Cancel</> : <><HiOutlinePlus /> Create New Task</>}
+                            {showForm
+                                ? <><HiOutlineX /> Cancel</>
+                                : <><HiOutlinePlus /> Create New Task</>
+                            }
                         </button>
-                        {showForm && <TaskForm onAdd={handleAddTask} />}
                     </section>
                 )}
 
-                {/* Tasks Section */}
-                <section className="tasks-section animate-fade-in">
-                    <div className="tasks-header">
-                        <h2>
-                            {isManagerOrAdmin ? '📋 All Tasks' : '📋 My Tasks'} 
-                            <span className="task-count">({filteredTasks.length})</span>
-                        </h2>
-                        <button className="btn-refresh" onClick={loadData} disabled={loading}>
-                            <HiOutlineRefresh style={{ animation: loading ? 'spin 1s linear infinite' : 'none' }} />
-                            {loading ? 'Refreshing...' : 'Refresh'}
-                        </button>
-                    </div>
-
-                    {/* Search & Filter Bar */}
-                    <div className="search-filter-bar">
-                        <div className="search-box">
-                            <HiOutlineSearch className="search-icon" />
-                            <input 
-                                type="text"
-                                placeholder="Search tasks by title, description, or assignee..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="search-input"
-                                id="task-search"
-                            />
-                            {searchQuery && (
-                                <button className="search-clear" onClick={() => setSearchQuery('')}>
-                                    <HiOutlineX />
-                                </button>
-                            )}
+                {/* Task Form Modal */}
+                {showForm && (
+                    <div className="modal-overlay" onClick={() => setShowForm(false)}>
+                        <div className="modal-content" onClick={e => e.stopPropagation()}>
+                            <TaskForm onAdd={handleAddTask} onClose={() => setShowForm(false)} />
                         </div>
-                        <div className="filter-group">
-                            <select 
-                                value={filterPriority} 
+                    </div>
+                )}
+
+                {/* Tasks Board */}
+                <section className="tasks-section animate-fade-in">
+                    <div className="tasks-toolbar">
+                        <div className="toolbar-left">
+                            <h2>
+                                {isManagerOrAdmin ? 'All Tasks' : 'My Tasks'}
+                                <span className="task-count-badge">{filteredTasks.length}</span>
+                            </h2>
+                        </div>
+                        <div className="toolbar-right">
+                            <div className="search-wrap">
+                                <HiOutlineSearch className="search-icon" />
+                                <input
+                                    type="text"
+                                    placeholder="Search tasks..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="search-input"
+                                    id="task-search"
+                                />
+                                {searchQuery && (
+                                    <button className="search-clear" onClick={() => setSearchQuery('')}>
+                                        <HiOutlineX />
+                                    </button>
+                                )}
+                            </div>
+                            <select
+                                value={filterPriority}
                                 onChange={(e) => setFilterPriority(e.target.value)}
                                 className="filter-select"
                                 id="priority-filter"
@@ -206,6 +265,9 @@ const Dashboard = ({ currentUser }) => {
                                 <option value="Medium">🟡 Medium</option>
                                 <option value="Low">🟢 Low</option>
                             </select>
+                            <button className="btn-refresh" onClick={loadData} disabled={loading} id="refresh-btn">
+                                <HiOutlineRefresh style={{ animation: loading ? 'spin 1s linear infinite' : 'none' }} />
+                            </button>
                         </div>
                     </div>
 
@@ -229,31 +291,34 @@ const Dashboard = ({ currentUser }) => {
                             <p>{isManagerOrAdmin ? "Click 'Create New Task' to get started." : "You have no assigned tasks right now."}</p>
                         </div>
                     ) : (
-                        <div className="kanban-board">
+                        <div className="board-grid">
                             {columns.map(col => (
-                                <div className="kanban-column" key={col.key}>
-                                    <div className="kanban-column-header">
-                                        <div className="kanban-column-title">
+                                <div className="board-column" key={col.key}>
+                                    <div className="board-column-header">
+                                        <div className="board-column-title">
                                             <span className={`column-dot ${col.dotClass}`}></span>
+                                            <span className="column-icon">{col.icon}</span>
                                             {col.label}
                                         </div>
-                                        <span className="kanban-column-count">
+                                        <span className="board-column-count">
                                             {groupedTasks[col.key]?.length || 0}
                                         </span>
                                     </div>
-                                    {groupedTasks[col.key]?.length > 0 ? (
-                                        groupedTasks[col.key].map(task => (
-                                            <TaskCard 
-                                                key={task.taskId} 
-                                                task={task} 
-                                                currentUser={currentUser}
-                                                onDelete={handleDeleteTask} 
-                                                onStatusUpdate={handleStatusUpdate}
-                                            />
-                                        ))
-                                    ) : (
-                                        <div className="kanban-empty">No tasks</div>
-                                    )}
+                                    <div className="board-column-body">
+                                        {groupedTasks[col.key]?.length > 0 ? (
+                                            groupedTasks[col.key].map(task => (
+                                                <TaskCard
+                                                    key={task.taskId}
+                                                    task={task}
+                                                    currentUser={currentUser}
+                                                    onDelete={handleDeleteTask}
+                                                    onStatusUpdate={handleStatusUpdate}
+                                                />
+                                            ))
+                                        ) : (
+                                            <div className="board-empty">No tasks</div>
+                                        )}
+                                    </div>
                                 </div>
                             ))}
                         </div>
