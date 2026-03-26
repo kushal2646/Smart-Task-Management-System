@@ -87,4 +87,30 @@ public class AuthController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/test-token")
+    @Operation(summary = "Test JWT token validation")
+    public ResponseEntity<?> testToken(@RequestHeader(value = "Authorization", required = false) String authHeader) {
+        Map<String, Object> result = new HashMap<>();
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            result.put("error", "No Bearer token in Authorization header");
+            result.put("authHeader", authHeader);
+            return ResponseEntity.ok(result);
+        }
+        String token = authHeader.substring(7);
+        result.put("tokenLength", token.length());
+        try {
+            String username = jwtUtil.extractUsername(token);
+            String role = jwtUtil.extractRole(token);
+            Boolean expired = jwtUtil.isTokenExpired(token);
+            result.put("username", username);
+            result.put("role", role);
+            result.put("expired", expired);
+            result.put("valid", true);
+        } catch (Exception e) {
+            result.put("valid", false);
+            result.put("error", e.getClass().getSimpleName() + ": " + e.getMessage());
+        }
+        return ResponseEntity.ok(result);
+    }
 }
