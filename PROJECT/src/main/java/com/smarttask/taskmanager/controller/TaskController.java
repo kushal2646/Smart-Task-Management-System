@@ -15,7 +15,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/tasks")
-@CrossOrigin("*")
 @Tag(name = "Tasks", description = "Task management APIs")
 public class TaskController {
 

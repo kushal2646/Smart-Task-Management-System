@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const API_URL = '/api/auth';
+// In production (Vercel), use the full backend URL from env variable
+// In development, use relative URL (Vite proxy handles it)
+const BACKEND_URL = import.meta.env.VITE_API_URL || '';
+const API_URL = `${BACKEND_URL}/api/auth`;
 
 export const login = async (username, password) => {
     const response = await axios.post(`${API_URL}/login`, { username, password });

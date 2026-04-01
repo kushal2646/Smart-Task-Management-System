@@ -1,7 +1,13 @@
 import axios from 'axios';
 
+// In production (Vercel), use the full backend URL from env variable
+// In development, use relative URL (Vite proxy handles it)
+const BACKEND_URL = import.meta.env.VITE_API_URL || '';
+
 // Create a dedicated axios instance for authenticated API calls
-const api = axios.create();
+const api = axios.create({
+    baseURL: BACKEND_URL,
+});
 
 const API_URL = '/api/tasks';
 
